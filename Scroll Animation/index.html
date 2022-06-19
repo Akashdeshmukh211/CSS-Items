@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Raleway:wght@100;900&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-image: linear-gradient(90deg, #4426d9, #f6f6f6);
+    font-family: "Courier New", Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+  }
+  h1 {
+    margin: 10px;
+  }
+  .box {
+    background-color: aqua;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 200px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.3);
+    transform: translateX(400%);
+    transition: transform 0.7s ease;
+  }
+  .box:nth-of-type(even) {
+    transform: translateX(-400%);
+  }
+  .box h2 {
+    font-size: 45px;
+  }
+  .box.show {
+    transform: translateX(0);
+  }
+</style>
+<html>
+  <title>Scroll Animation</title>
+  <body>
+    <h1>Scroll Animation</h1>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+    <div class="box"><h2>Content</h2></div>
+  </body>
+  <script>
+    const boxes = document.querySelectorAll(".box");
+    window.addEventListener("scroll", checkBoxes);
+    checkBoxes();
+    function checkBoxes() {
+      const triggerBottom = (window.innerHeight / 5) * 4;
+      boxes.forEach((box) => {
+        const boxTop = box.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+          box.classList.add("show");
+        } else {
+          box.classList.remove("show");
+        }
+      });
+    }
+  </script>
+</html>
