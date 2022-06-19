@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Raleway:wght@100;900&display=swap"
+  rel="stylesheet"
+/><link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: #333;
+    color: #222;
+    font-family: "Courier New", Courier, monospace;
+
+    overflow-x: hidden;
+    margin: 0;
+  }
+  .container {
+    background-color: aliceblue;
+    transform-origin: top left;
+    transition: transform 0.5s linear;
+    width: 100vw;
+    min-width: 100vh;
+    padding: 50px;
+  }
+  .container.show-nav {
+    transform: rotate(-20deg);
+  }
+  .circle-container {
+    position: fixed;
+    top: -100px;
+    left: -100px;
+  }
+  .circle {
+    background-color: burlywood;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    position: relative;
+    transition: transform 0.5s linear;
+  }
+  .circle button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    background: transparent;
+    border: 0;
+    font-size: 26px;
+    color: #fff;
+  }
+  .circle button:focus {
+    outline: none;
+  }
+  .circle button#open {
+    left: 60%;
+  }
+  .circle button#close {
+    top: 60%;
+    transition: rotate(180deg);
+    transform-origin: top left;
+  }
+  .container.show-nav + nav li {
+    transform: translateX(0);
+    transition-delay: 0.3s;
+  }
+  nav {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    z-index: 100;
+  }
+  nav ul {
+    list-style-type: none;
+    padding-left: 30px;
+  }
+  .nav ul li {
+    text-transform: uppercase;
+    color: #fff;
+    margin: 40px 0;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in;
+  }
+  nav ul li i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  nav ul li + li {
+    margin-left: 15px;
+    transform: translateX(-150%);
+  }
+  nav ul li + li + li {
+    margin-left: 30px;
+    transform: translateX(-200%);
+  }
+</style>
+<html>
+  <title>Expanding Cards</title>
+  <body>
+    <div class="container">
+      <div class="circle-container">
+        <div class="circle">
+          <button id="close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+          <button id="open">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+      <div class="content">
+        <h1>Amazing Article</h1>
+        <small>Floring pop</small>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, tenetur?
+          Possimus dicta ex totam magnam nulla quis exercitationem, minus illum
+          quia placeat dolores nemo mollitia id quod aut provident sit.
+        </p>
+        <h3>Amit</h3>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><i class="fas fa-home"></i>home</li>
+        <li><i class="fas fa-user-alt"></i>About</li>
+        <li><i class="fas fa-envelope"></i>home</li>
+      </ul>
+    </nav>
+  </body>
+  <script>
+    const progress = document.getElementById("progress");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("Next");
+    const circle = document.querySelectorAll(".circle");
+    let currentActive = 1;
+
+    next.addEventListener("click", () => {
+      currentActive++;
+      if (currentActive > circle.length) {
+        currentActive = circle.length;
+      }
+      update();
+    });
+
+    prev.addEventListener("click", () => {
+      currentActive--;
+      if (currentActive < 1) {
+        currentActive = 1;
+      }
+      update();
+    });
+
+    function update() {
+      circle.forEach((c, i) => {
+        if (i < currentActive) {
+          c.classList.add("active");
+        } else {
+          c.classList.remove("active");
+        }
+      });
+      const actives = document.querySelectorAll(".active");
+
+      progress.style.width =
+        ((actives.length - 1) / (circle.length - 1)) * 100 + "%";
+      if (currentActive === 1) {
+        prev.disabled = true;
+      } else if (currentActive === circle.length) {
+        next.disabled = true;
+      } else {
+        prev.disabled = false;
+        next.disabled = false;
+      }
+    }
+  </script>
+</html>
