@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Raleway:wght@100;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: "Courier New", Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vw;
+    overflow: hidden;
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    width: 90vw;
+  }
+  .panel {
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    flex: 0.5;
+    margin: 10px;
+    position: relative;
+    transition: flex 0.3s ease-in;
+  }
+  .panel h3 {
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0;
+  }
+  .active {
+    flex: 5;
+  }
+  .active h3 {
+    opacity: 1;
+  }
+  @media (max-width: 480px) {
+    .container {
+      width: 100vw;
+    }
+    .panel:nth-child(4).panel:nth-child(5) {
+      display: none;
+    }
+  }
+</style>
+<html>
+  <title>Expanding Cards</title>
+  <body>
+    <div class="container">
+      <div class="panel active" style="background-color: green">
+        <h3>Card-1</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel" style="background-color: red">
+        <h3>Card-2</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel" style="background-color: pink">
+        <h3>Card-3</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel" style="background-color: yellow">
+        <h3>Card-4</h3>
+      </div>
+    </div>
+    <div class="container">
+      <div class="panel" style="background-color: blue">
+        <h3>Card-5</h3>
+      </div>
+    </div>
+  </body>
+  <script>
+    const panels = document.querySelectorAll(".panel");
+    panels.forEach((panel) => {
+      panel.addEventListener("click", () => {
+        removeActiveClass();
+        panel.classList.add("active");
+        console.log(panel);
+      });
+    });
+    function removeActiveClass() {
+      panels.forEach((panel) => {
+        panel.classList.remove("active");
+      });
+    }
+  </script>
+</html>
