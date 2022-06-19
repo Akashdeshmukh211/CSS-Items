@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Comforter+Brush&family=Raleway:wght@100;900&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    background-color: #c2c2c2;
+    font-family: "Courier New", Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+  }
+  .container {
+    text-align: center;
+  }
+  .progress-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+    width: 350px;
+  }
+  .progress-container::before {
+    content: "";
+    background-color: bisque;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .progress {
+    background-color: rgb(39, 78, 197);
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: -1;
+    transition: 0.4s ease;
+  }
+  .circle {
+    background-color: #fff;
+    color: #999;
+    display: flex;
+    border-radius: 50%;
+    border: 3px solid #e0e0e0;
+    transition: 0.4s ease;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s ease;
+  }
+  .active {
+    border-color: #454533;
+  }
+  .btn {
+    background-color: cadetblue;
+    color: #fff;
+    border-radius: 6px;
+
+    border: 0px;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 8px 30px;
+    margin: 5px;
+    font-size: 14px;
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn:focus {
+    outline: 0;
+  }
+  .btn:disabled {
+    background-color: #e3e3e3;
+    cursor: not-allowed;
+  }
+</style>
+<html>
+  <title>Expanding Cards</title>
+  <body>
+    <div class="container">
+      <div class="progress-container">
+        <div class="progress" id="progress"></div>
+        <div class="circle active">1</div>
+        <div class="circle">2</div>
+        <div class="circle">3</div>
+        <div class="circle">4</div>
+        <div class="circle">5</div>
+      </div>
+      <button class="btn" id="prev" disabled>Prev</button>
+      <button class="btn" id="Next">Next</button>
+    </div>
+  </body>
+  <script>
+    const progress = document.getElementById("progress");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("Next");
+    const circle = document.querySelectorAll(".circle");
+    let currentActive = 1;
+
+    next.addEventListener("click", () => {
+      currentActive++;
+      if (currentActive > circle.length) {
+        currentActive = circle.length;
+      }
+      update();
+    });
+
+    prev.addEventListener("click", () => {
+      currentActive--;
+      if (currentActive < 1) {
+        currentActive = 1;
+      }
+      update();
+    });
+
+    function update() {
+      circle.forEach((c, i) => {
+        if (i < currentActive) {
+          c.classList.add("active");
+        } else {
+          c.classList.remove("active");
+        }
+      });
+      const actives = document.querySelectorAll(".active");
+
+      progress.style.width =
+        ((actives.length - 1) / (circle.length - 1)) * 100 + "%";
+      if (currentActive === 1) {
+        prev.disabled = true;
+      } else if (currentActive === circle.length) {
+        next.disabled = true;
+      } else {
+        prev.disabled = false;
+        next.disabled = false;
+      }
+    }
+  </script>
+</html>
