@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+    integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      /* background-color: aqua; */
+      background-position: center;
+      background-size: cover;
+      transition: 0.4s ease-in;
+    }
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: -1;
+    }
+    .slider-container {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+      height: 70vh;
+      width: 70vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .slide {
+      opacity: 0;
+      height: 100vh;
+      width: 100vw;
+      background-position: center center;
+      background-size: cover;
+      position: absolute;
+      top: -15vh;
+      left: -15vw;
+      transition: 0.4s ease;
+      z-index: 1;
+    }
+    .slide.active {
+      opacity: 1;
+    }
+    .arrow:focus {
+      outline: 0;
+    }
+    .arrow {
+      color: #fff;
+      position: fixed;
+      /* z-index: 100; */
+      background-color: transparent;
+      padding: 20px;
+      font-size: 30px;
+      border: 2px solid orange;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    .left-arrow {
+      left: calc(15vw - 65px);
+    }
+    .right-arrow {
+      right: calc(15vw - 65px);
+    }
+  </style>
+  <title>BackGround-Color-Slider</title>
+  <body>
+    <div class="slider-container">
+      <div class="slide" style="background-color: rgb(121, 176, 231)"></div>
+      <div class="slide" style="background-color: rgb(85, 206, 121)"></div>
+
+      <div class="slide" style="background-color: rgb(231, 121, 200)"></div>
+      <div class="slide" style="background-color: rgb(231, 174, 121)"></div>
+      <div class="slide" style="background-color: rgb(231, 229, 121)"></div>
+      <button class="arrow left-arrow" id="left">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <button class="arrow right-arrow" id="right">
+        <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </body>
+  <script>
+    const body = document.body;
+    const slide = document.querySelectorAll(".slide");
+    const left = document.getElementById("left");
+    const right = document.getElementById("right");
+    let activeSilde = 0;
+    right.addEventListener("click", () => {
+      activeSilde++;
+      if (activeSilde > slide.length - 1) {
+        activeSilde = 0;
+      }
+      setbgtobody();
+      setActiveSlide();
+    });
+    left.addEventListener("click", () => {
+      activeSilde--;
+      if (activeSilde < 0) {
+        activeSilde = slide.length - 1;
+      }
+      setbgtobody();
+      setActiveSlide();
+    });
+    setbgtobody();
+    function setbgtobody() {
+      body.style.backgroundColor = slide[activeSilde].style.backgroundColor;
+    }
+    function setActiveSlide() {
+      slide.forEach((slide) => slide.classList.remove("active"));
+      slide[activeSilde].classList.add("active");
+    }
+  </script>
+</html>
